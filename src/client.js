@@ -1,4 +1,4 @@
-const { Client, Intents } = require("discord.js");
+const { Client, Intents, MessageEmbed } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -29,11 +29,20 @@ client.on("messageCreate", async (message) => {
   console.log(message);
 });
 
+const testMessage = new MessageEmbed()
+  .setColor("#0099ff")
+  .setTitle("wow??")
+  .setAuthor(
+    "Some name",
+    "https://i.imgur.com/AfFp7pu.png",
+    "https://discord.js.org"
+  );
+
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
 
   if (interaction.commandName === "ping") {
-    await interaction.reply("Pong!");
+    await interaction.reply({ embeds: [testMessage] });
   }
 });
 
